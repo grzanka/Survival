@@ -959,7 +959,10 @@ void Calculus::rapidLEM_Russo2011(double &alphaIon,
                     log(survivalSingleImpact) * (density * area_nucleus) / (CONV * let);
         alpha_D = alpha_X * (1 - (density * area_nucleus * doseSingleImpact) / (CONV * let)) +
                     (1 - survivalSingleImpact) * (density * area_nucleus) / (CONV * let);
-        
+
+        cout << setprecision(6) << endl << "plot_E_alphaz_RBE," << tracks[k].getKineticEnergy() << "," << alpha_z << "," << alpha_z / alpha_X << endl << endl;
+
+
         if( D_t == 0 )
             beta_z = 0;
         else
@@ -973,6 +976,8 @@ void Calculus::rapidLEM_Russo2011(double &alphaIon,
         alpha_tot += weight * let * alpha_D;
         sqrt_beta_tot += weight * let * sqrt(beta_D);
         meanLet += weight * let;
+
+
     }
     
     alphaIon = alpha_tot / meanLet;
@@ -1015,6 +1020,8 @@ void Calculus::rapidLEM_Scholz2006(double &alphaIon,
         doseSingleImpact = CONV * track->getLet() / (tracks.getDensity() * M_PI * pow(nucleus.getRadius(), 2));
         
         alpha_z = -log(survivalSingleImpact) / doseSingleImpact;
+
+        cout << setprecision(6) << endl << "plot_E_alphaz_RBE," << track->getKineticEnergy() << "," << alpha_z << "," << alpha_z / alpha_X << endl << endl;
         
         if( D_t == 0 )
             beta_z = 0;
